@@ -11,6 +11,7 @@ const logInGoogle = () =>{
       //const credential = GoogleAuthProvider.credentialFromResult(result);
 
       //const token = credential.accessToken;
+      console.log(GoogleAuthProvider.credentialFromResult(result))
       // The signed-in user info.
       return result.user;
       // ...

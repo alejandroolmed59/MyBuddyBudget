@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import SignIn from './config/provider'
+import Dashboard from './dashboard'
+import 'antd/dist/antd.css';
 //import * as firebaseui from 'firebaseui'
 //import 'firebaseui/dist/firebaseui.css'
 require('dotenv').config()
@@ -34,6 +36,6 @@ const Reloj = (props) =>{
 
 
 ReactDOM.render(
-  <Saludo />,
+  <Dashboard />,
   document.getElementById('root')
 );
