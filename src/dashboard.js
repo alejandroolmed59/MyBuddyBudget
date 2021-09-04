@@ -6,7 +6,9 @@ import {
   TeamOutlined,
   DollarOutlined,
 } from '@ant-design/icons';
+import Expenses from './Expenses'
 import SignIn from './config/provider'
+import Verificador from './config/verifyJwt'
 import './app.css'
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -17,14 +19,27 @@ class SiderDemo extends React.Component {
     collapsed: false,
     usuario:''
   };
-
+  componentDidMount=()=>{
+    const jwt = localStorage.getItem('jwt')
+    console.log(jwt)
+    if(jwt){
+      const usuario = Verificador(jwt);
+      //console.log(usuario)
+      this.setState({usuario:usuario.name});
+    }
+  }
   onCollapse = collapsed => {
     console.log(collapsed);
     this.setState({ collapsed });
   };
   onSign = async() =>{
     const res = await SignIn();
-    this.setState({usuario: res.displayName})
+    if(res){
+      localStorage.setItem('jwt', await res.getIdToken());
+      this.setState({usuario: res.displayName})
+    }else{
+      this.setState({usuario:"error"})
+    }
   } 
 
   render() {
@@ -55,11 +70,11 @@ class SiderDemo extends React.Component {
           </Menu>
         </Sider>
         <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }}>
-          <Button type="primary" style={{ margin: '16px' }} onClick={this.onSign}>Iniciar sesion</Button>
-            </Header>
-          <Content style={{ margin: '0 16px' }}>
-
+          <Header className="site-layout-background">
+            <Button type="primary" onClick={this.onSign}>Iniciar sesion</Button>
+          </Header>
+          <Content className="content-layout">
+            <Expenses />
           </Content>
           <Footer style={{ textAlign: 'center' }}>My Buddy Budget Alejandro Olmedo</Footer>
         </Layout>

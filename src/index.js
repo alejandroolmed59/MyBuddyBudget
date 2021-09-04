@@ -23,7 +23,11 @@ const Saludo = () =>{
     <Reloj timer={timer}/>
     <button onClick={async()=>{
       const res = await SignIn();
-      setNombre(res.displayName)
+      if(res){
+        setNombre(res.displayName)
+      }else{
+        setNombre('Error')
+      }
     }}>Aprete dog</button>
   </>;
 }

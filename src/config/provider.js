@@ -11,7 +11,6 @@ const logInGoogle = () =>{
       //const credential = GoogleAuthProvider.credentialFromResult(result);
 
       //const token = credential.accessToken;
-      console.log(GoogleAuthProvider.credentialFromResult(result))
       // The signed-in user info.
       return result.user;
       // ...
@@ -20,6 +19,7 @@ const logInGoogle = () =>{
       // Handle Errors here.
       //const errorCode = error.code;
        console.log(error.message);
+       return null;
       // The email of the user's account used.
       //const email = error.email;
       // The AuthCredential type that was used.
