@@ -3,8 +3,8 @@ import { Layout,Menu, Button, Avatar} from 'antd';
 import {
   WalletFilled,
   FileOutlined,
-  TeamOutlined,
   DollarOutlined,
+  HomeOutlined
 } from '@ant-design/icons';
 import Expenses from './Expenses'
 import SignIn from './config/provider'
@@ -20,12 +20,16 @@ class SiderDemo extends React.Component {
     usuario:''
   };
   componentDidMount=()=>{
-    const jwt = localStorage.getItem('jwt')
-    console.log(jwt)
-    if(jwt){
-      const usuario = Verificador(jwt);
-      //console.log(usuario)
-      this.setState({usuario:usuario.name});
+    try{
+      const jwt = localStorage.getItem('jwt')
+      console.log(jwt)
+      if(jwt){
+        const usuario = Verificador(jwt);
+        //console.log(usuario)
+        this.setState({usuario:usuario.name});
+      }
+    }catch(e){
+      console.log(e)
     }
   }
   onCollapse = collapsed => {
@@ -48,12 +52,13 @@ class SiderDemo extends React.Component {
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse} width={400} collapsedWidth={200}>
           <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" inlineIndent={24} defaultOpenKeys={['sub1','sub2']}>
-            <Menu.Item key="1">
-                <>
-                <Avatar size="large" src={`https://avatars.dicebear.com/api/pixel-art/${this.state.usuario}.svg`} /> 
+          <Menu theme="dark" defaultSelectedKeys={['0']} mode="inline" inlineIndent={24} defaultOpenKeys={['sub1','sub2']}>
+
+            <Menu.Item key="0" icon={<HomeOutlined />}>
+              My buddy budget
+            </Menu.Item>
+            <Menu.Item key="1" icon={<Avatar src={`https://avatars.dicebear.com/api/jdenticon/${this.state.usuario}.svg`} /> }>   
                 Bienvenido {this.state.usuario}
-                </>
             </Menu.Item>
             <SubMenu key="sub1" icon={<WalletFilled />} title="Wallets">
               <Menu.Item key="3" danger>Wal1</Menu.Item>

@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+//import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
-import SignIn from './config/provider'
+//import SignIn from './config/provider'
 import Dashboard from './dashboard'
 import 'antd/dist/antd.css';
 //import * as firebaseui from 'firebaseui'
 //import 'firebaseui/dist/firebaseui.css'
 require('dotenv').config()
-
+/*
 const Saludo = () =>{
   const [nombre, setNombre] = useState("Anon");
   const [timer, setTimer] = useState(0);
@@ -37,7 +38,7 @@ const Persona = (props) =>{
 const Reloj = (props) =>{
   return <h1>{props.timer} 😎</h1>
 }
-
+*/
 
 ReactDOM.render(
   <Dashboard />,
