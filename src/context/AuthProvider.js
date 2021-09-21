@@ -3,7 +3,8 @@ import AuthContext from "./auth-context";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
-  updateProfile
+  updateProfile,
+  signOut
 } from "firebase/auth";
 import { auth } from "../firebase/fire";
 
@@ -20,7 +21,7 @@ const AuthProvider = (props) => {
     //algo
   };
   const logout = () => {
-    //algo
+    return signOut(auth);
   };
 
   useEffect(() => {

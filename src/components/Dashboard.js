@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Menu, Avatar } from "antd";
+import { Layout, Menu, Avatar, Button } from "antd";
 import {
   WalletFilled,
   FileOutlined,
@@ -26,7 +26,7 @@ class Dashboard extends React.Component {
     const { collapsed } = this.state;
     return (
       <AuthContext.Consumer >
-        {({currentUser})=>
+        {({currentUser, logout})=>
         (<Layout style={{ minHeight: "100vh", maxWidth: "99%" }}>
           <Sider
             collapsible
@@ -75,7 +75,9 @@ class Dashboard extends React.Component {
             </Menu>
           </Sider>
           <Layout className="site-layout">
-            <Header className="site-layout-background"></Header>
+            <Header className="site-layout-background">
+              <Button type="primary" onClick={logout}>SignOut</Button>
+            </Header>
             <Content className="content-layout">
               <Expenses />
             </Content>
