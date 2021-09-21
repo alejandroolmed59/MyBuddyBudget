@@ -2,11 +2,14 @@ import React from 'react';
 //import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 //import SignIn from './config/provider'
-import Dashboard from './dashboard'
+import Dashboard from './Dashboard'
 import 'antd/dist/antd.css';
+//import Form from './Form'
+//import './formularioFormik.css'
 //import * as firebaseui from 'firebaseui'
 //import 'firebaseui/dist/firebaseui.css'
 require('dotenv').config()
+
 /*
 const Saludo = () =>{
   const [nombre, setNombre] = useState("Anon");

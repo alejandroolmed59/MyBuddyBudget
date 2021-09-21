@@ -1,15 +1,6 @@
 import { initializeApp } from "firebase/app";
-//import { GoogleAuthProvider, getAuth, getRedirectResult} from "firebase/auth";
-require("dotenv").config();
-/*
-const firebaseConfig = {
-    apiKey: process.env.apiKey,
-    authDomain: process.env.authDomain,
-    projectId: process.env.projectId,
-    storageBucket: process.env.storageBucket,
-    messagingSenderId: process.env.messagingSenderId,
-    appId: process.env.appId
-  };*/
+import {getAuth} from 'firebase/auth'
+
 const firebaseConfig = {
   apiKey: "AIzaSyCUI73BlYCRcw_vejHrnAYYIVKNFikGDqM",
   authDomain: "mybuddybudget.firebaseapp.com",
@@ -20,4 +11,5 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 
+export const auth = getAuth();
 export default app;

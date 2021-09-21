@@ -7,8 +7,12 @@ import {
   HomeOutlined
 } from '@ant-design/icons';
 import Expenses from './Expenses'
-import SignIn from './config/provider'
-import Verificador from './config/verifyJwt'
+
+//import Form from './Form'
+//import './formularioFormik.css'
+
+import SignIn from './firebase/provider'
+import Verificador from './firebase/verifyJwt'
 import './app.css'
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -49,7 +53,7 @@ class SiderDemo extends React.Component {
   render() {
     const { collapsed } = this.state;
     return (
-      <Layout style={{ minHeight: '100vh' }}>
+      <Layout style={{ minHeight: '100vh', maxWidth:'99%'}}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse} width={400} collapsedWidth={200}>
           <div className="logo" />
           <Menu theme="dark" defaultSelectedKeys={['0']} mode="inline" inlineIndent={24} defaultOpenKeys={['sub1','sub2']}>
