@@ -9,7 +9,7 @@ import { auth } from "../firebase/fire";
 const AuthProvider = (props) => {
   const [currentUser, setCurrentUser] = useState({});
 
-  const register = (email, password) => {
+  const register = (username, email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
   const login = (email, password) => {
@@ -21,6 +21,7 @@ const AuthProvider = (props) => {
 
   useEffect(() => {
     const observer = onAuthStateChanged(auth, (user) => {
+      console.log("Iniciando sesion con "+JSON.stringify(auth))
       setCurrentUser(user);
     });
 
