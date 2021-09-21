@@ -27,7 +27,7 @@ const AuthProvider = (props) => {
     return observer;
   }, []);
 
-  const authContext = {
+  const authContextObj = {
     currentUser,
     register,
     login,
@@ -35,7 +35,7 @@ const AuthProvider = (props) => {
   };
 
   return (
-    <AuthContext.Provider value={authContext}>
+    <AuthContext.Provider value={authContextObj}>
       {props.children}
     </AuthContext.Provider>
   );
