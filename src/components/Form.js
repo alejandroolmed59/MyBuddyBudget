@@ -1,91 +1,125 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Formik } from "formik";
-import AuthContext from '../context/auth-context'
+import AuthContext from "../context/auth-context";
+import { Form, Input, Button, Checkbox } from "antd";
+import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
+import { useHistory } from "react-router";
 
-const Form = () => {
+const Formulario = () => {
   const AuthCtx = useContext(AuthContext);
-
+  const history = useHistory();
   return (
     <Formik
       initialValues={{
-        nombre: "Ale",
-        correo: "osiamusical@gmail.com",
-        password:""
+        nombre: "",
+        correo: "",
+        password: "",
       }}
       onSubmit={async (valores, funciones) => {
-        funciones.resetForm({ nombre: "", correo: "", password:"" });
-        await AuthCtx.register(valores.nombre, valores.correo, valores.password);
-        
-      }}
-      validate={(valores) => {
-        let errores = {};
-        if (!valores.nombre) {
-          errores.nombre = "ingresa un nombre";
-        } else if (!/^[a-zA-Z\s]{1,40}$/.test(valores.nombre)) {
-          errores.nombre =
-            "Solo puede contener letras y espacios no mayor a 40 char";
-        }
-        if (!valores.correo) {
-          errores.correo = "ingresa un correo";
-        } else if (
-          !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.correo)
-        ) {
-          errores.correo = "Correo solo puede contener letras numeros, guiones";
-        }
-        return errores;
+        try{
+          await AuthCtx.register(
+            valores.nombre,
+            valores.correo,
+            valores.password
+            );
+            history.push('/home');
+            funciones.resetForm({ nombre: "", correo: "", password: "" });
+          }catch(e){
+            console.log(e)
+          }
       }}
     >
-      {({handleSubmit, values,handleChange,errors,handleBlur,touched}) => (
-        <form className="formulario" onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="nombre">Nombre</label>
-            <input
-              type="text"
+      {({
+        handleSubmit,
+        values,
+        handleChange,
+        errors,
+        handleBlur,
+        touched,
+      }) => (
+        <Form
+          name="normal_login"
+          className="login-form"
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={handleSubmit}
+        >
+          <Form.Item
+            name="nombre"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Username!",
+              },
+            ]}
+          >
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              placeholder="Username"
               id="nombre"
               name="nombre"
               value={values.nombre}
               onChange={handleChange}
-              onBlur={handleBlur}
             />
-            {touched.nombre && errors.nombre && (
-              <div className="error">{errors.nombre}</div>
-            )}
-          </div>
-          <div>
-            <label htmlFor="correo">Correo</label>
-            <input
-              type="text"
+          </Form.Item>
+          <Form.Item
+            name="correo"
+            rules={[
+              {
+                required: true,
+                message: "Please input your email",
+              },
+            ]}
+          >
+            <Input
+              prefix={<MailOutlined className="site-form-item-icon" />}
+              placeholder="Email"
               id="correo"
               name="correo"
               value={values.correo}
               onChange={handleChange}
-              handleBlur={handleBlur}
             />
-            {touched.correo && errors.correo && (
-              <div className="error">{errors.correo}</div>
-            )}
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                min:5,
+                required: true,
+                message: "Please input your Password!",
+              },
+            ]}
+          >
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
+              placeholder="Password"
               id="password"
               name="password"
               value={values.password}
               onChange={handleChange}
-              handleBlur={handleBlur}
             />
-            {touched.password && errors.password && (
-              <div className="error">{errors.password}</div>
-            )}
-          </div>
-          <div>
-            <button type="submit">Darle mecha</button>
-          </div>
-        </form>
+          </Form.Item>
+          <Form.Item>
+            <Form.Item name="remember" valuePropName="checked" noStyle>
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
+          </Form.Item>
+
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+            >
+              Register
+            </Button>
+          </Form.Item>
+        </Form>
       )}
     </Formik>
   );
 };
 
-export default Form;
+export default Formulario;
