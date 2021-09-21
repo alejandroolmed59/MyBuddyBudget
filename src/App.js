@@ -8,8 +8,8 @@ export const App = () => {
   return (
     <AuthProvider>
       <Switch>
-        <Route exact path="/" component={Dashboard} />
-        <Route path="/register" component={Register} />
+        <Route exact path="/home" component={Dashboard} />
+        <Route path="/" component={Register} />
       </Switch>
     </AuthProvider>
   );

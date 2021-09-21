@@ -21,35 +21,12 @@ class Dashboard extends React.Component {
     console.log(collapsed);
     this.setState({ collapsed });
   };
-  /*
-  componentDidMount=()=>{
-    try{
-      const jwt = localStorage.getItem('jwt')
-      console.log(jwt)
-      if(jwt){
-        const usuario = Verificador(jwt);
-        //console.log(usuario)
-        this.setState({usuario:usuario.name});
-      }
-    }catch(e){
-      console.log(e)
-    }
-
-  onSign = async() =>{
-    const res = await SignIn();
-    if(res){
-      localStorage.setItem('jwt', await res.getIdToken());
-      this.setState({usuario: res.displayName})
-    }else{
-      this.setState({usuario:"error"})
-    }
-  } */
 
   render() {
     const { collapsed } = this.state;
     return (
       <AuthContext.Consumer >
-        {value=>
+        {({currentUser})=>
         (<Layout style={{ minHeight: "100vh", maxWidth: "99%" }}>
           <Sider
             collapsible
@@ -77,7 +54,7 @@ class Dashboard extends React.Component {
                   />
                 }
               >
-                Bienvenido {value.currentUser.email}
+                Bienvenido {currentUser.displayName}
               </Menu.Item>
               <SubMenu key="sub1" icon={<WalletFilled />} title="Wallets">
                 <Menu.Item key="3" danger>
