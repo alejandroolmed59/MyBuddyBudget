@@ -10,7 +10,7 @@ const Layout = ({exact, path, component:Component, ...props}) => {
             exact={exact}
             path={path}
             render={()=>{
-                if(!AuthCTX.currentUser) return <Redirect exact to="/"/>
+                if(!AuthCTX.currentUser) return <Redirect exact to="/login"/>
                 const cp =(<Component {...props}/>)
                 return cp
             }}

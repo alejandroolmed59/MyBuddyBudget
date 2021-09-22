@@ -4,7 +4,8 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   updateProfile,
-  signOut
+  signOut,
+  signInWithEmailAndPassword
 } from "firebase/auth";
 import { auth } from "../firebase/fire";
 
@@ -18,7 +19,7 @@ const AuthProvider = (props) => {
     })
   };
   const login = (email, password) => {
-    //algo
+    return signInWithEmailAndPassword(auth, email, password)
   };
   const logout = () => {
     return signOut(auth);
