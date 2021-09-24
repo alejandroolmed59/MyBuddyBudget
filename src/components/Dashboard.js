@@ -50,7 +50,7 @@ class Dashboard extends React.Component {
                 key="1"
                 icon={
                   <Avatar
-                    src={`https://avatars.dicebear.com/api/jdenticon/usuario.svg`}
+                    src={`https://avatars.dicebear.com/api/jdenticon/${currentUser.uid}.svg`}
                   />
                 }
               >

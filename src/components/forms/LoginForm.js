@@ -15,14 +15,15 @@ const LoginForm = () => {
         password: "",
       }}
       onSubmit={async (valores, funciones) => {
-        console.log(valores)
+        
         try {
-          await AuthCtx.login(
+          const autenticacion = await AuthCtx.login(
             valores.correo,
             valores.password
           );
+          console.log(autenticacion)
           history.push("/");
-          funciones.resetForm({correo: "", password: "" });
+         // funciones.resetForm({correo: "", password: "" });
         } catch (e) {
           console.log(e);
         }
