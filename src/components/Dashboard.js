@@ -6,7 +6,6 @@ import {
   DollarOutlined,
   HomeOutlined,
 } from "@ant-design/icons";
-import Expenses from "./expenses/Expenses";
 import AuthContext from "../context/auth-context";
 import "../app.css";
 
@@ -57,7 +56,7 @@ class Dashboard extends React.Component {
                 Bienvenido {currentUser.displayName}
               </Menu.Item>
               <SubMenu key="sub1" icon={<WalletFilled />} title="Wallets">
-                <Menu.Item key="3" danger>
+                <Menu.Item key="3" danger onClick={()=>this.props.cb(`${this.props.path}/expenses`)}>
                   Wal1
                 </Menu.Item>
                 <Menu.Item key="4" disabled>
@@ -66,7 +65,7 @@ class Dashboard extends React.Component {
                 <Menu.Item key="5">Wal3</Menu.Item>
               </SubMenu>
               <SubMenu key="sub2" icon={<DollarOutlined />} title="Category">
-                <Menu.Item key="6">Team 1</Menu.Item>
+                <Menu.Item key="6" onClick={()=>this.props.cb(`${this.props.path}/chart`)}>Team 1</Menu.Item>
                 <Menu.Item key="8">Team 2</Menu.Item>
               </SubMenu>
               <Menu.Item key="9" icon={<FileOutlined />}>
@@ -79,7 +78,7 @@ class Dashboard extends React.Component {
               <Button type="primary" onClick={logout}>SignOut</Button>
             </Header>
             <Content className="content-layout">
-              <Expenses />
+              {this.props.children}
             </Content>
             <Footer style={{ textAlign: "center" }}>
               My Buddy Budget Alejandro Olmedo

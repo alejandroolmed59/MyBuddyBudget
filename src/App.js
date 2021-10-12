@@ -1,16 +1,16 @@
 import React from "react";
 import AuthProvider from './context/AuthProvider'
-import {Switch, Route} from 'react-router-dom'
-import Dashboard from './components/Dashboard'
+import {Switch, Route, Redirect} from 'react-router-dom'
 import Register from './components/forms/RegisterForm'
 import Login from './components/forms/LoginForm'
-import Layout from "./Layout/Layout";
+import LayoutDashboard from "./Layout/LayoutDashboard";
 
 export const App = () => {
   return (
     <AuthProvider>
       <Switch>
-        <Layout exact path="/" component={Dashboard} />
+        <Route exact path="/" render={()=><Redirect exact to="/home" />} />
+        <LayoutDashboard path="/home"/>
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
       </Switch>
