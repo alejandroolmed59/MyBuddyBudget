@@ -11,6 +11,7 @@ const accountRoutes = require('./src/routes/account');
 const accountTypeRoutes = require('./src/routes/account-type');
 const currencyRoutes = require('./src/routes/currency');
 const badRequestRoute = require('./src/routes/bad-request');
+const expenseRoute = require('./src/routes/expense');
 
 app.use(cors);
 
@@ -18,6 +19,7 @@ app.use(guard);
 
 app.use(express.json());
 
+app.use(expenseRoute);
 app.use(userRoutes);
 app.use(accountRoutes);
 app.use(accountTypeRoutes);

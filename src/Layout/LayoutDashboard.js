@@ -27,8 +27,8 @@ const LayoutDashboard = ({exact, path, ...props}) => {
                 <DashboardProvider >
                     <Dashboard path={routeProps.match.path} cb={redireccionar}>
                         <Switch>
-                            <Route exact path={`${routeProps.match.path}/`}  />
-                            <Route exact path={`${routeProps.match.path}/expenses`} component={Expenses}/>
+                            <Route exact path={`${routeProps.match.path}/`} component={Expenses} />
+                        {/*    <Route exact path={`${routeProps.match.path}/expenses`} component={Expenses}/> */}
                             <Route exact path={`${routeProps.match.path}/chart`} component={PieChart}/>
                         </Switch>
                     </Dashboard>
