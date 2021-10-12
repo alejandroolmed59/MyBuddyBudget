@@ -1,19 +1,25 @@
 const AccountType = require('../models/account-type');
 
-module.exports.createAccountType =  (req, res, next) => {
-  const args = [req.body.description];
-  AccountType.create(args)
-  .then(() => res.status(200).json({ valid: true, message: 'Account type created!' }))
-  .catch((e) => res.status(400).json({ valid: false, message: e }));
+module.exports.createAccountType =  async(req, res, next) => {
+  console.log(req.body);
+  const {descripcion} = req.body;
+  try{
+    const created = await AccountType.create(descripcion);
+    console.log(created);
+    res.status(200).json({message:"Tipo de cuenta creado!"})
+  }catch(e){
+    res.status(400).json({message: e });
+  }
 }
 
-module.exports.getAccountType = (req, res, next) => {
-  const args = [parseInt(req.params.id, 10)];
-  AccountType.findById(args)
-  .then(({rows}) => {
-    res.status(200).json({ valid: true, data: rows })
-  })
-  .catch((e) => res.status(400).json({ valid: false, message: e }));
+module.exports.getAccountType = async(req, res, next) => {
+  //const args = [parseInt(req.params.id, 10)];
+  try{
+    const result = await AccountType.findById(req.params.id)
+    res.status(200).json(result)
+  }catch(e){
+    res.status(400).json({message: e });
+  }
 }
 
 module.exports.getAccountsType = async(req, res, next) => {

@@ -6,14 +6,17 @@ const AccountTypeModel = sequelize.define('cuenta_tipo', {
   cuenta_tipo: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    primaryKey:true
+    primaryKey:true,
+    autoIncrement:true
   },
   descripcion: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull:false
     // allowNull defaults to true
   },
   add_fecha:{
-    type: DataTypes.DATE
+    type: DataTypes.DATE,
+    allowNull:false
   }
 },{
   timestamps:false,
@@ -22,10 +25,13 @@ const AccountTypeModel = sequelize.define('cuenta_tipo', {
 
 const AccountType = {};
 
-AccountType.create = (data) => {
+AccountType.create = (descripcion) => {
+  console.log(descripcion)
+  return AccountTypeModel.create({descripcion,add_fecha: new Date() })
 }
 
 AccountType.findById = (data) => {
+  return AccountTypeModel.findByPk(data);
 }
 
 AccountType.fetchAll = () => {

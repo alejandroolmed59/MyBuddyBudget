@@ -1,16 +1,14 @@
-import React, {useState} from 'react'
-import {Card, Switch, Avatar} from 'antd'
+import React from 'react'
+import {Card, Avatar} from 'antd'
+
 import {DeleteOutlined, EditOutlined, EllipsisOutlined} from '@ant-design/icons'
 
 function ExpenseCard() {
-    const [loading, setLoad]= useState(false)
-    const onChange = () =>{
-        setLoad(!loading)
-    }
+
     return (
         <>  
-            <Switch checked={!loading}  onChange={()=>onChange()} />
-            <Card style={{width:'90%', marginTop:'6px'}} loading={loading} bordered hoverable
+
+            <Card style={{width:'90%', marginTop:'6px'}} bordered hoverable
             actions={[
                 <DeleteOutlined key="setting" />,
                 <EditOutlined key="edit" />,
