@@ -18,11 +18,11 @@ const ExpenseModel = sequelize.define('expense', {
     type: DataTypes.NUMBER,
     allowNull:false
   },
-  usuario:{
+  usuario:{ //TODO: UNIR TABLA
       type: DataTypes.STRING,
       allowNull:false
   },
-  expense_categoria:{
+  expense_categoria:{ //TODO: UNIR TABLA
       type: DataTypes.INTEGER,
       allowNull:false
   }
