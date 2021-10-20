@@ -24,7 +24,7 @@ const WalletItems = (props) => {
         return (
           <Menu.Item
             key={id}
-            onClick={() => props.cb(`${props.path}/expensexs/`)}
+            onClick={() => props.cb(`${props.path}/wallet/`, wallet)}
           >
             {wallet.descripcion}
           </Menu.Item>
