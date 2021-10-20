@@ -4,7 +4,7 @@ import { Redirect, useHistory, Switch } from 'react-router-dom/cjs/react-router-
 import AuthContext from '../context/auth-context'
 import Dashboard from '../components/DashboardComponents/Dashboard'
 import Expenses from '../components/expenses/Expenses'
-import PieChart from '../components/PieChart'
+import PieChart from '../components/Statistics/PieChart'
 import DashboardProvider from '../context/DashboardProvider'
 //import DashboardContext from '../context/dashboard-context'
 

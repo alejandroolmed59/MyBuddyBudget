@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Select, InputNumber, Input, Space } from "antd";
+import { Modal, Select, InputNumber, Input, Space, message } from "antd";
 import { UserOutlined, BookOutlined } from "@ant-design/icons";
 import axios from "axios";
+import {updateActions} from '../../redux/slice/updateSlice'
+import { useDispatch } from "react-redux";
 
 const { Option } = Select;
 
 const ModalBorrow = (props) => {
+  const dispatch = useDispatch();
   const [selectedExpenseType, setSelectedExpenseType] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [precio, setPrecio] = useState(0);
@@ -23,10 +26,18 @@ const ModalBorrow = (props) => {
 
   const addExpensePost = async() => {
     if(selectedExpenseType!=="" && descripcion!=="" && precio!==0){
-      let response = await axios.post('http://localhost:3800/expense', {
-        descripcion, precio, usuario:'olme59', expense_categoria:selectedExpenseType
-      })
-      console.log(response);
+      try{
+
+        let response = await axios.post('http://localhost:3800/expense', {
+          descripcion, precio, usuario:'olme59', expense_categoria:selectedExpenseType
+        })
+        message.success("New expense added succesfully!")
+        dispatch(updateActions.toggle())
+        props.closeModal("expense");
+        console.log(response);
+      }catch(e){
+        console.log("oh no "+e)
+      }
       
     }
   };

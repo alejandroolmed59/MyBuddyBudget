@@ -2,8 +2,10 @@ import React, {useEffect, useState} from "react";
 import Card from "./ExpenseCard";
 import { Row, Col } from "antd";
 import axios from 'axios'
+import {useSelector} from 'react-redux'
 
 export default function Expenses() {
+  const shouldUpdate = useSelector(store=>store.update.update)
 
   const [expenses, setExpenses] = useState([]);
   useEffect(() => {
@@ -14,7 +16,7 @@ export default function Expenses() {
       setExpenses(response);
     };
     fetch();
-  }, []);
+  }, [shouldUpdate]);
 
   return (
     <Row style={{marginLeft:'12px'}} gutter={[8,8]} justify="space-between">
@@ -23,7 +25,7 @@ export default function Expenses() {
             <Card expense={expense}/>
           </Col>
         })}
-
+        
     </Row>
   );
 }

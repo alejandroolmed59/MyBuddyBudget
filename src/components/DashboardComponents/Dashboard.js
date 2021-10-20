@@ -4,7 +4,6 @@ import {
   FileOutlined,
   DollarOutlined,
   HomeOutlined,
-  BankOutlined,
 } from "@ant-design/icons";
 import AuthContext from "../../context/auth-context";
 //import DashboardContext from "../../context/dashboard-context";
