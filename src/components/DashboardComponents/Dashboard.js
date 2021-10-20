@@ -1,14 +1,15 @@
 import React from "react";
 import { Layout, Menu, Avatar, Button } from "antd";
 import {
-  WalletFilled,
   FileOutlined,
   DollarOutlined,
   HomeOutlined,
+  BankOutlined,
 } from "@ant-design/icons";
 import AuthContext from "../../context/auth-context";
 //import DashboardContext from "../../context/dashboard-context";
 import WalletItems from "./WalletItems";
+import ManageExpensesAndIncome from "./ManageExpensesAndIncome";
 import "../../app.css";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -58,6 +59,8 @@ class Dashboard extends React.Component {
                 >
                   Bienvenido {currentUser.displayName}
                 </Menu.Item>
+
+                <ManageExpensesAndIncome />
 
                 <WalletItems cb={this.props.cb} path={this.props.path} />
 

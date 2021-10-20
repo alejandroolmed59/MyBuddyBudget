@@ -12,6 +12,7 @@ const accountTypeRoutes = require('./src/routes/account-type');
 const currencyRoutes = require('./src/routes/currency');
 const badRequestRoute = require('./src/routes/bad-request');
 const expenseRoute = require('./src/routes/expense');
+const expenseTypeRoutes = require('./src/routes/expense-type')
 
 app.use(cors);
 
@@ -24,6 +25,7 @@ app.use(userRoutes);
 app.use(accountRoutes);
 app.use(accountTypeRoutes);
 app.use(currencyRoutes);
+app.use(expenseTypeRoutes);
 app.use(badRequestRoute);
 
 app.listen(server.port, () => {

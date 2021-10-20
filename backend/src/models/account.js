@@ -40,7 +40,6 @@ const AccountModel = sequelize.define('cuenta', {
 const Account = {};
 
 Account.create = ({descripcion,cuenta_tipo, moneda, usuario}) => {
-  console.log("HOLA "+descripcion)
   return AccountModel.create({
       descripcion,
       cuenta_tipo,

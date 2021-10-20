@@ -4,6 +4,8 @@ const ExpenseController = require('../controllers/expense');
 
 router.get('/expense/', ExpenseController.getAllExpenses);
 
+router.post('/expense/', ExpenseController.createExpense)
+
 router.get('/expense/:id', ExpenseController.getOneExpense);
 
 //router.post('/account-type', ExpenseController.createExpense);

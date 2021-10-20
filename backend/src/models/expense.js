@@ -33,9 +33,12 @@ const ExpenseModel = sequelize.define('expense', {
 
 const Expense = {};
 
-Expense.create = (data) => {
-  console.log(data)
-  return ExpenseModel.create(data)
+Expense.create = (descripcion, precio, usuario, expense_categoria) => {
+  return ExpenseModel.create({
+    descripcion, 
+    precio, 
+    usuario, 
+    expense_categoria})
 }
 
 Expense.findById = (data) => {

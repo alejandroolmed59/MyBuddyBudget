@@ -19,7 +19,7 @@ export default function Expenses() {
   return (
     <Row style={{marginLeft:'12px'}} gutter={[8,8]} justify="space-between">
         {expenses.map(expense=>{
-            return <Col span={12}>
+            return <Col span={12} key={expense.expense}>
             <Card expense={expense}/>
           </Col>
         })}

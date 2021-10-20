@@ -3,12 +3,13 @@ const Expense = require('../models/expense');
 //TODO NOT WORKING CREATE
 module.exports.createExpense =  async(req, res, next) => {
   console.log(req.body);
-  const {descripcion} = req.body;
+  const {descripcion, precio, usuario, expense_categoria} = req.body;
   try{
-    const created = await Expense.create(descripcion);
+    const created = await Expense.create(descripcion, precio, usuario, expense_categoria);
     console.log(created);
     res.status(200).json({message:"Tipo de cuenta creado!"})
   }catch(e){
+    console.log(e)
     res.status(400).json({message: e });
   }
 }
