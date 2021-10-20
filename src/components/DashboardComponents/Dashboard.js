@@ -45,7 +45,7 @@ class Dashboard extends React.Component {
                 inlineIndent={24}
                 defaultOpenKeys={["sub1", "sub2"]}
               >
-                <Menu.Item key="0" icon={<HomeOutlined />}>
+                <Menu.Item key="0" icon={<HomeOutlined />} onClick={()=>this.props.cb(`${this.props.path}/`)}>
                   My buddy budget
                 </Menu.Item>
                 <Menu.Item

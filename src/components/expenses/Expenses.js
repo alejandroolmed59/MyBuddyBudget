@@ -12,7 +12,6 @@ export default function Expenses() {
     const fetch = async () => {
       let response = await axios.get("http://localhost:3800/expense/");
       response = await response.data;
-      console.log(response);
       setExpenses(response);
     };
     fetch();

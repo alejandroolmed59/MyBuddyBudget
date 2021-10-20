@@ -10,7 +10,6 @@ const WalletItems = (props) => {
     const fetch = async () => {
       let response = await axios.get("http://localhost:3800/account");
       response = await response.data;
-      console.log(response);
       setWallets(response);
     };
     fetch();
@@ -20,7 +19,6 @@ const WalletItems = (props) => {
     <SubMenu key="sub1" icon={<WalletFilled />} title="Wallets">
       {wallets.map((wallet) => {
         let id = "SubWallet" + wallet.cuenta;
-        console.log(id);
         return (
           <Menu.Item
             key={id}
