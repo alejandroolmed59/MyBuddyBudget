@@ -22,10 +22,10 @@ const ExpenseModel = sequelize.define('expense', {
       type: DataTypes.STRING,
       allowNull:false
   },
-  expense_categoria:{ //TODO: UNIR TABLA
-      type: DataTypes.INTEGER,
-      allowNull:false
-  }
+ // expense_categoria:{ //TODO: UNIR TABLA
+   //   type: DataTypes.INTEGER,
+     // allowNull:false
+  //}
 },{
   timestamps:false,
   freezeTableName:true
@@ -46,7 +46,14 @@ Expense.findById = (data) => {
 }
 
 Expense.fetchAll = () => {
-  return ExpenseModel.findAll();
+  return ExpenseModel.findAll({
+    attributes: {exclude:"expense_categoria", include:"expense"},
+    include:"CategoriaExpenseObj",
+    
+  });
 }
 
-module.exports = Expense;
+module.exports = {
+  Expense,
+  ExpenseModel
+};

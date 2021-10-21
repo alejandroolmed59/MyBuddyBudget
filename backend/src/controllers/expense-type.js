@@ -1,4 +1,4 @@
-const ExpenseCategoria = require('../models/expense-type');
+const {ExpenseCategoria} = require('../models/expense-type');
 
 
 module.exports.getAllExpenses = async(req, res, next) => {

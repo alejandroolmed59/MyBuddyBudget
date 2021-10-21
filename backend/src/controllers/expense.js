@@ -1,4 +1,4 @@
-const Expense = require('../models/expense');
+const {Expense} = require('../models/expense');
 
 //TODO NOT WORKING CREATE
 module.exports.createExpense =  async(req, res, next) => {
