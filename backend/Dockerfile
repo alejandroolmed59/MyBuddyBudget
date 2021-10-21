@@ -1,7 +1,7 @@
 # BUILD
 # docker build -t backendbuddy:1.0 .
 # RUN
-# docker run -p 3800:3800 --rm -d backendbuddy:1.0
+# docker run --name backend-buddy -p 3800:3800 --rm -d backendbuddy:1.0
 FROM node:14.18.1
 
 WORKDIR /opt/app

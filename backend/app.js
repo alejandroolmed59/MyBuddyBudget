@@ -15,6 +15,7 @@ const currencyRoutes = require('./src/routes/currency');
 const badRequestRoute = require('./src/routes/bad-request');
 const expenseRoute = require('./src/routes/expense');
 const expenseTypeRoutes = require('./src/routes/expense-type')
+const holamundoRoute = require('./src/routes/home')
 require('./src/models/Associations');
 
 app.use(cors);
@@ -23,6 +24,7 @@ app.use(guard);
 
 app.use(express.json());
 
+app.use(holamundoRoute);
 app.use(expenseRoute);
 app.use(userRoutes);
 app.use(accountRoutes);

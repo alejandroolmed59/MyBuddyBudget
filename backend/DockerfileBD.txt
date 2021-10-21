@@ -1,7 +1,7 @@
-docker run -d -p 5432:5432 \
+docker run -d --rm -p 5432:5432 \
  --name postgres-buddy \
 -e POSTGRES_USER=postgres \
 -e POSTGRES_PASSWORD=postgres \
 -e POSTGRES_DB=baseSql \
--v /data/postgres:/var/lib/postgresql/data \
--v backup:/docker-entrypoint-initdb.d postgres:14
+-v /home/olme59/vscode/MyBuddyBudget-Frontend/backend/data:/var/lib/postgresql/data \
+-v /home/olme59/vscode/MyBuddyBudget-Frontend/backend/init:/docker-entrypoint-initdb.d postgres:14
