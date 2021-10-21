@@ -38,4 +38,7 @@ AccountType.fetchAll = () => {
   return AccountTypeModel.findAll();
 }
 
-module.exports = AccountType;
+module.exports = {
+  AccountTypeModel,
+  AccountType
+} ;

@@ -29,7 +29,7 @@ const WalletDetail = ({ wallet }) => {
         <Card>
           <Statistic
             title="Account Type"
-            value={wallet.cuenta_tipo}
+            value={wallet.CuentaTypoObj.descripcion}
           />
         </Card>
       </Col>
@@ -38,7 +38,7 @@ const WalletDetail = ({ wallet }) => {
           <Statistic
             prefix={<MoneyCollectOutlined />}
             title="Currecy"
-            value={wallet.moneda}
+            value={wallet.MonedaObj.descripcion}
 
           />
         </Card>

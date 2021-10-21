@@ -1,4 +1,4 @@
-const AccountType = require('../models/account-type');
+const {AccountType} = require('../models/account-type');
 
 module.exports.createAccountType =  async(req, res, next) => {
   console.log(req.body);

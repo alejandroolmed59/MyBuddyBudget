@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+//const sequelize = require("./src/util/posgre-database");
+require('./src/models/Associations')
 const cors = require('cors')({origin: true});
 
 const { server } = require('./src/config/config');
@@ -13,6 +15,7 @@ const currencyRoutes = require('./src/routes/currency');
 const badRequestRoute = require('./src/routes/bad-request');
 const expenseRoute = require('./src/routes/expense');
 const expenseTypeRoutes = require('./src/routes/expense-type')
+require('./src/models/Associations');
 
 app.use(cors);
 

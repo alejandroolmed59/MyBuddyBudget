@@ -1,5 +1,6 @@
 const sequelize = require("../util/posgre-database");
 const { DataTypes } = require("sequelize");
+const {AccountTypeModel} = require('./account-type')
 
 const AccountModel = sequelize.define(
   "cuenta",
@@ -15,16 +16,6 @@ const AccountModel = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    cuenta_tipo: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 1,
-    },
-    moneda: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 1,
-    },
     usuario: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -36,6 +27,7 @@ const AccountModel = sequelize.define(
     },
     saldo: {
       type: DataTypes.NUMBER,
+      allowNull: false
     },
   },
   {
@@ -61,7 +53,12 @@ Account.findById = (data) => {
 };
 
 Account.fetchAll = () => {
-  return AccountModel.findAll();
+  return AccountModel.findAll({
+    include:["CuentaTypoObj","MonedaObj"]
+  });
 };
 
-module.exports = Account;
+module.exports = {
+  Account,
+  AccountModel
+};
