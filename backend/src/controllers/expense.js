@@ -1,4 +1,5 @@
 const {Expense} = require('../models/expense');
+const {Account} = require('../models/account')
 
 //TODO NOT WORKING CREATE
 module.exports.createExpense =  async(req, res, next) => {
@@ -6,6 +7,20 @@ module.exports.createExpense =  async(req, res, next) => {
   const {descripcion, precio, usuario, expense_categoria} = req.body;
   try{
     const created = await Expense.create(descripcion, precio, usuario, expense_categoria);
+    console.log(created);
+    res.status(200).json({message:"Tipo de cuenta creado!"})
+  }catch(e){
+    console.log(e)
+    res.status(400).json({message: e });
+  }
+}
+
+module.exports.createExpenseAndDeduceFromWallet =  async(req, res, next) => {
+  console.log(req.body);
+  const {descripcion, precio, usuario, expense_categoria, walletid} = req.body;
+  try{
+    const created = await Expense.create(descripcion, precio, usuario, expense_categoria);
+    await Account.deduceFromWallet(walletid, precio);
     console.log(created);
     res.status(200).json({message:"Tipo de cuenta creado!"})
   }catch(e){

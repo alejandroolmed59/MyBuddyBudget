@@ -48,6 +48,15 @@ Account.create = ({ descripcion, cuenta_tipo, moneda, usuario }) => {
   });
 };
 
+Account.deduceFromWallet = (walletId, amount) =>{
+  return AccountModel.increment('saldo', { 
+    by: -amount, 
+    where: {
+      cuenta:walletId
+    }
+  });
+}
+
 Account.findById = (data) => {
   return AccountModel.findByPk(data);
 };

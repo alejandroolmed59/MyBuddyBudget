@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Menu } from "antd";
 import {WalletFilled } from "@ant-design/icons";
+import {useSelector} from 'react-redux'
 
 const WalletItems = (props) => {
+  const shouldUpdate = useSelector(store=>store.update.update)
   const [wallets, setWallets] = useState([]);
   const { SubMenu } = Menu;
   useEffect(() => {
@@ -13,7 +15,7 @@ const WalletItems = (props) => {
       setWallets(response);
     };
     fetch();
-  }, []);
+  }, [shouldUpdate]);
 
   return (
     <SubMenu key="sub1" icon={<WalletFilled />} title="Wallets">

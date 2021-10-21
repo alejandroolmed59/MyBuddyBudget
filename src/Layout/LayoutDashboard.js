@@ -3,6 +3,7 @@ import {Route} from 'react-router-dom'
 import { Redirect, useHistory, Switch } from 'react-router-dom/cjs/react-router-dom.min'
 import AuthContext from '../context/auth-context'
 import Dashboard from '../components/DashboardComponents/Dashboard'
+import Profile from '../components/DashboardComponents/Profile'
 import Expenses from '../components/expenses/Expenses'
 import PieChart from '../components/Statistics/PieChart'
 import DashboardProvider from '../context/DashboardProvider'
@@ -35,6 +36,7 @@ const LayoutDashboard = ({exact, path, ...props}) => {
                                 return(<WalletDetail wallet={objeto}/>)
                             }} /> 
                             <Route exact path={`${routeProps.match.path}/chart`} component={PieChart}/>
+                            <Route exact path={`${routeProps.match.path}/profile`} component={Profile}/>
                         </Switch>
                     </Dashboard>
                 </DashboardProvider>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Select, InputNumber, Input, Space, message } from "antd";
-import { UserOutlined, BookOutlined } from "@ant-design/icons";
+import { BookOutlined, WalletFilled , CalculatorOutlined} from "@ant-design/icons";
 import axios from "axios";
 import {updateActions} from '../../redux/slice/updateSlice'
 import { useDispatch } from "react-redux";
@@ -10,40 +10,46 @@ const { Option } = Select;
 const ModalBorrow = (props) => {
   const dispatch = useDispatch();
   const [selectedExpenseType, setSelectedExpenseType] = useState("");
+  const [selectedWallet, setSelectedWallet] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [precio, setPrecio] = useState(0);
+
   const [expensesTypeArr, setExpensesArr] = useState([]);
+  const [wallets, setWallets] = useState([]);
+
 
   useEffect(() => {
     async function fetchMyAPI() {
-      let response = await axios.get("http://localhost:3800/expense-type/");
-      response = await response.data;
-      setExpensesArr(response);
+      let responseExp = await axios.get("http://localhost:3800/expense-type/");
+      let responseWall = await axios.get("http://localhost:3800/account");
+      responseExp = await responseExp.data;
+      responseWall = await responseWall.data;
+      setWallets(responseWall);
+      setExpensesArr(responseExp);
     }
     fetchMyAPI();
     //eslint-disable-next-line
   }, []);
 
   const addExpensePost = async() => {
-    if(selectedExpenseType!=="" && descripcion!=="" && precio!==0){
-      try{
+    try{
+      if(wallets.find(el=>el.cuenta===selectedWallet).saldo<precio) throw Error("Insuficiente fondos")
 
-        let response = await axios.post('http://localhost:3800/expense', {
-          descripcion, precio, usuario:'olme59', expense_categoria:selectedExpenseType
-        })
-        message.success("New expense added succesfully!")
-        dispatch(updateActions.toggle())
-        props.closeModal("expense");
-        console.log(response);
+      if(selectedExpenseType!=="" && descripcion!=="" && precio!==0 && selectedWallet!==""){
+          await axios.post('http://localhost:3800/expense/pay', {
+            descripcion, precio, usuario:'olme59', expense_categoria:selectedExpenseType, walletid:selectedWallet
+          })
+          message.success("New expense added succesfully!")
+          dispatch(updateActions.toggle())
+          dispatch(updateActions.toggleWallets())
+          props.closeModal("expense");
+      }  
       }catch(e){
-        console.log("oh no "+e)
-      }
-      
+        message.error("Fondos insuficientes")
     }
+    
   };
 
-  console.log(selectedExpenseType);
-  console.log(descripcion)
   return (
     <Modal
       title={
@@ -65,6 +71,7 @@ const ModalBorrow = (props) => {
           placeholder="Descripcion"
         />
         <InputNumber
+          min={0}
           formatter={value=> `$ ${value}`}
           onChange={setPrecio}
         />
@@ -73,8 +80,7 @@ const ModalBorrow = (props) => {
           style={{ width: 200 }}
           placeholder={
             <>
-              <UserOutlined className="site-form-item-icon" />
-              <p>Select a category</p>
+              <CalculatorOutlined className="site-form-item-icon" /> Select a category
             </>
           }
           optionFilterProp="children"
@@ -84,6 +90,25 @@ const ModalBorrow = (props) => {
             return (
               <Option value={expense.expense_categoria}>
                 {expense.descripcion}
+              </Option>
+            );
+          })}
+        </Select>
+        <Select
+          showSearch
+          style={{ width: 200 }}
+          placeholder={
+            <>
+              <WalletFilled className="site-form-item-icon" /> Select a wallet
+              </>
+          }
+          optionFilterProp="children"
+          onChange={(value) => setSelectedWallet(value)}
+        >
+          {wallets.map((wallet) => {
+            return (
+              <Option value={wallet.cuenta}>
+                {wallet.descripcion} - ${wallet.saldo}
               </Option>
             );
           })}

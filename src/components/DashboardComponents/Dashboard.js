@@ -19,7 +19,6 @@ class Dashboard extends React.Component {
     collapsed: false,
   };
   onCollapse = (collapsed) => {
-    console.log(collapsed);
     this.setState({ collapsed });
   };
 
@@ -55,6 +54,7 @@ class Dashboard extends React.Component {
                       src={`https://avatars.dicebear.com/api/jdenticon/${currentUser.uid}.svg`}
                     />
                   }
+                  onClick={() => this.props.cb(`${this.props.path}/profile`)}
                 >
                   Bienvenido {currentUser.displayName}
                 </Menu.Item>

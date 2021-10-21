@@ -1,7 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 const initialUpdateState = {
-    update:false
+    update:false,
+    updateWallets:false
 }
 
 const UpdateSlice = createSlice({
@@ -11,6 +12,9 @@ const UpdateSlice = createSlice({
         toggle(state, action){
             state.update = !state.update
             console.log(state.update)
+        },
+        toggleWallets(state){
+            state.updateWallets = !state.updateWallets
         }
     },
 });
