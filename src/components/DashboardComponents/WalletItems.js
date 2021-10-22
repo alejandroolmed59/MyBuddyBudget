@@ -1,20 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Menu } from "antd";
 import {WalletFilled } from "@ant-design/icons";
 import {useSelector} from 'react-redux'
+import AuthContext from "../../context/auth-context";
 
 const WalletItems = (props) => {
   const shouldUpdate = useSelector(store=>store.update.update)
   const [wallets, setWallets] = useState([]);
   const { SubMenu } = Menu;
+  const { currentUser } = useContext(AuthContext);
+  
   useEffect(() => {
     const fetch = async () => {
-      let response = await axios.get("http://localhost:3800/account");
+      let response = await axios.get(`http://localhost:3800/account/${currentUser.displayName}`);
       response = await response.data;
       setWallets(response);
     };
     fetch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldUpdate]);
 
   return (

@@ -19,10 +19,9 @@ function ExpenseCard({expense}) {
                     <Avatar src={expense.CategoriaExpenseObj.img} />
                     }
                     title={expense.CategoriaExpenseObj.descripcion}
-                    style={{color:'red'}}
                     description={expense.descripcion}
                 />
-                <h1 style={{margin:'10px 0px 0px 50px', color:'red'}}>$-{expense.precio}</h1>
+                {Number(expense.precio)>0?<h1 className='greenNumbers marginh1weird'>${expense.precio}</h1>:<h1 className='redNumbers marginh1weird'>${expense.precio}</h1>}
             </Card>
         </>
     )

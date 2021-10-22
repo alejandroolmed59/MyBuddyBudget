@@ -13,7 +13,6 @@ module.exports.createAccount =  async(req, res, next) => {
 
 module.exports.getAccountsByUser = async(req, res, next) => {
   const userName = req.params.userName;
-  console.log('Entro!', userName)
   try{
     const result = await Account.findAccountsByUser(userName)
     res.status(200).json(result)

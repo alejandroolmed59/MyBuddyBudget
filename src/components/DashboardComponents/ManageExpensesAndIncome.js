@@ -6,9 +6,10 @@ import { useState } from 'react/cjs/react.development';
 
 const ManageExpensesAndIncome = () => {
     const [showModalExpense, setModalExpense] = useState(false)
+    const [isExpense, setIsExpense] = useState(null)
 
-    const closeModal = (modalName) =>{
-      if(modalName==='expense') setModalExpense(false)
+    const closeModal = () =>{
+      setModalExpense(false)
     }
 
     const { SubMenu } = Menu;
@@ -19,19 +20,20 @@ const ManageExpensesAndIncome = () => {
             icon={<MinusOutlined />}
             danger
             key="expense"
-            onClick={() =>{setModalExpense(true)}}
+            onClick={() =>{setModalExpense(true); setIsExpense(true)}}
           >
               Add expense
             </Menu.Item>
-          <ModalAddExpense visible={showModalExpense} closeModal={closeModal}/>
+          
          <Menu.Item
             icon={<PlusOutlined/>}
             
             key="income"
-            onClick={() =>{}}
+            onClick={() =>{setModalExpense(true); setIsExpense(false)}}
           >
-              Add income
+            Add income
             </Menu.Item>
+          <ModalAddExpense visible={showModalExpense} closeModal={closeModal} isExpense={isExpense}/>
 
     </SubMenu>
     )

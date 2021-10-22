@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Modal, Select, InputNumber, Input, Space, message } from "antd";
-import { BookOutlined, WalletFilled , CalculatorOutlined} from "@ant-design/icons";
+import {
+  BookOutlined,
+  WalletFilled,
+  CalculatorOutlined,
+} from "@ant-design/icons";
 import axios from "axios";
-import {updateActions} from '../../redux/slice/updateSlice'
+import { updateActions } from "../../redux/slice/updateSlice";
 import { useDispatch } from "react-redux";
 import AuthContext from "../../context/auth-context";
 
@@ -19,7 +23,6 @@ const ModalBorrow = (props) => {
   const [expensesTypeArr, setExpensesArr] = useState([]);
   const [wallets, setWallets] = useState([]);
 
-
   useEffect(() => {
     async function fetchMyAPI() {
       let responseExp = await axios.get("http://localhost:3800/expense-type/");
@@ -33,23 +36,58 @@ const ModalBorrow = (props) => {
     //eslint-disable-next-line
   }, []);
 
-  const addExpensePost = async() => {
-    try{
-      if(wallets.find(el=>el.cuenta===selectedWallet).saldo<precio) throw Error("Insuficiente fondos")
+  const addExpensePost = async () => {
+    if (props.isExpense) {
+      try {
+        if (wallets.find((el) => el.cuenta === selectedWallet).saldo < precio)
+          throw Error("Insuficiente fondos");
 
-      if(selectedExpenseType!=="" && descripcion!=="" && precio!==0 && selectedWallet!==""){
-          await axios.post('http://localhost:3800/expense/pay', {
-            descripcion, precio, usuario:currentUser.displayName, expense_categoria:selectedExpenseType, walletid:selectedWallet
-          })
-          message.success("New expense added succesfully!")
-          dispatch(updateActions.toggle())
-          dispatch(updateActions.toggleWallets())
-          props.closeModal("expense");
-      }  
-      }catch(e){
-        message.error("Fondos insuficientes")
+        if (
+          selectedExpenseType !== "" &&
+          descripcion !== "" &&
+          precio !== 0 &&
+          selectedWallet !== ""
+        ) {
+          await axios.post("http://localhost:3800/expense/pay", {
+            descripcion,
+            precio: -precio,
+            usuario: currentUser.displayName,
+            expense_categoria: selectedExpenseType,
+            walletid: selectedWallet,
+          });
+          message.success("New expense added succesfully!");
+          dispatch(updateActions.toggle());
+          dispatch(updateActions.toggleWallets());
+          props.closeModal();
+        }
+      } catch (e) {
+        message.error("Fondos insuficientes");
+      }
+    }else{
+      try{
+        if (
+          selectedExpenseType !== "" &&
+          descripcion !== "" &&
+          precio !== 0 &&
+          selectedWallet !== ""
+        ) {
+          await axios.post("http://localhost:3800/expense/pay", {
+            descripcion,
+            precio: precio,
+            usuario: currentUser.displayName,
+            expense_categoria: selectedExpenseType,
+            walletid: selectedWallet,
+          });
+          message.success("New income added succesfully!");
+          dispatch(updateActions.toggle());
+          dispatch(updateActions.toggleWallets());
+          props.closeModal();
+        }
+      }
+      catch (e) {
+        message.error("Error añadiendo income");
+      }
     }
-    
   };
 
   return (
@@ -57,24 +95,32 @@ const ModalBorrow = (props) => {
       title={
         <>
           <BookOutlined className="site-form-item-icon" />
-          <p>Do you want to add an expense?</p>
+          {props.isExpense ? (
+            <p>
+              Do you want to add an <strong className="redNumbers">expense</strong>?
+            </p>
+          ) : (
+            <p>
+              Do you want to add an <strong className="greenNumbers">income</strong>?
+            </p>
+          )}
         </>
       }
       visible={props.visible}
       onOk={() => addExpensePost()}
-      onCancel={() => props.closeModal("expense")}
+      onCancel={() => props.closeModal()}
       okText="Submit"
       cancelText="Cancel"
     >
       <Space direction="vertical">
         <Input
-          onChange={(e)=>setDescripcion(e.target.value)}
+          onChange={(e) => setDescripcion(e.target.value)}
           size="small"
           placeholder="Descripcion"
         />
         <InputNumber
           min={0}
-          formatter={value=> `$ ${value}`}
+          formatter={(value) => `$ ${value}`}
           onChange={setPrecio}
         />
         <Select
@@ -82,7 +128,8 @@ const ModalBorrow = (props) => {
           style={{ width: 200 }}
           placeholder={
             <>
-              <CalculatorOutlined className="site-form-item-icon" /> Select a category
+              <CalculatorOutlined className="site-form-item-icon" /> Select a
+              category
             </>
           }
           optionFilterProp="children"
@@ -102,7 +149,7 @@ const ModalBorrow = (props) => {
           placeholder={
             <>
               <WalletFilled className="site-form-item-icon" /> Select a wallet
-              </>
+            </>
           }
           optionFilterProp="children"
           onChange={(value) => setSelectedWallet(value)}

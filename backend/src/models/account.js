@@ -27,7 +27,8 @@ const AccountModel = sequelize.define(
     },
     saldo: {
       type: DataTypes.NUMBER,
-      allowNull: false
+      allowNull: false,
+      defaultValue:0
     },
   },
   {
@@ -48,9 +49,9 @@ Account.create = ({ descripcion, cuenta_tipo, moneda, usuario }) => {
   });
 };
 
-Account.deduceFromWallet = (walletId, amount) =>{
+Account.modifyWalletBalance = (walletId, amount) =>{
   return AccountModel.increment('saldo', { 
-    by: -amount, 
+    by: amount, 
     where: {
       cuenta:walletId
     }
@@ -59,6 +60,7 @@ Account.deduceFromWallet = (walletId, amount) =>{
 
 Account.findAccountsByUser = (userName) => {
   return AccountModel.findAll({
+    include:["CuentaTypoObj","MonedaObj"],
     where:{
       usuario:userName
     }

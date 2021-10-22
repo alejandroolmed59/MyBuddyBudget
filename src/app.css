@@ -21,3 +21,15 @@
   justify-content: center;
   align-items: center;
 }
+
+.redNumbers{
+  color:red
+}
+
+.greenNumbers{
+  color:#00a000
+}
+
+.marginh1weird{
+  margin: 10px 0px 0px 50px;
+}
