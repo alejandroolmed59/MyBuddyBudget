@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const { createAccount, 
-        getAccount, 
+        getAccountsByUser, 
         getAccounts } = require('../controllers/account');
 
 router.post('/account', createAccount);
 
-router.get('/account/:id', getAccount);
+router.get('/account/:userName', getAccountsByUser);
 
 router.get('/account', getAccounts);
 

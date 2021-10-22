@@ -1,5 +1,4 @@
 import React from "react";
-import PieChart from '../Statistics/PieChart'
 import { Row, Col, Statistic, Card } from "antd";
 import {ArrowUpOutlined, MoneyCollectOutlined} from '@ant-design/icons'
 
@@ -45,7 +44,7 @@ const WalletDetail = ({ wallet }) => {
       </Col>
       <Col span={24}>
           {/*TODO: LOGICA DEL PIE CHART*/}
-        <PieChart />
+        
       </Col>
     </Row>
   );

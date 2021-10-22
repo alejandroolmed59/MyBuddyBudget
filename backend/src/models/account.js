@@ -57,8 +57,12 @@ Account.deduceFromWallet = (walletId, amount) =>{
   });
 }
 
-Account.findById = (data) => {
-  return AccountModel.findByPk(data);
+Account.findAccountsByUser = (userName) => {
+  return AccountModel.findAll({
+    where:{
+      usuario:userName
+    }
+  })
 };
 
 Account.fetchAll = () => {
