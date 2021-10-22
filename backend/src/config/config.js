@@ -1,6 +1,5 @@
 const dotenv = require('dotenv');
 dotenv.config();
-console.log('H0ST',process.env.POSTGRE_HOST, 'bd', process.env.POSTGRE_DATABASE)
 module.exports = {
   postgre: {
     user: process.env.POSTGRE_USER,
