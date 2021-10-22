@@ -26,7 +26,7 @@ const ModalBorrow = (props) => {
   useEffect(() => {
     async function fetchMyAPI() {
       let responseExp = await axios.get("http://localhost:3800/expense-type/");
-      let responseWall = await axios.get("http://localhost:3800/account");
+      let responseWall = await axios.get(`http://localhost:3800/account/${currentUser.displayName}`);
       responseExp = await responseExp.data;
       responseWall = await responseWall.data;
       setWallets(responseWall);

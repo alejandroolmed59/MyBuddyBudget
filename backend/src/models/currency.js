@@ -40,9 +40,7 @@ Currency.findById = (data) => {
 };
 
 Currency.fetchAll = () => {
-  return CurrencyModel.findAll({
-    include:["type"]
-  });
+  return CurrencyModel.findAll();
 };
 
 module.exports = {

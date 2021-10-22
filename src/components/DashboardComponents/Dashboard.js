@@ -1,7 +1,6 @@
 import React from "react";
 import { Layout, Menu, Avatar, Button } from "antd";
 import {
-  FileOutlined,
   DollarOutlined,
   HomeOutlined,
 } from "@ant-design/icons";
@@ -10,13 +9,14 @@ import AuthContext from "../../context/auth-context";
 import WalletItems from "./WalletItems";
 import ManageExpensesAndIncome from "./ManageExpensesAndIncome";
 import "../../app.css";
+import ModalAddWallet from "../Modals/ModalAddWallet";
 
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
 
 class Dashboard extends React.Component {
   state = {
     collapsed: false,
+    showModalWallet:false
   };
   onCollapse = (collapsed) => {
     this.setState({ collapsed });
@@ -24,6 +24,7 @@ class Dashboard extends React.Component {
 
   render() {
     const { collapsed } = this.state;
+    const {showModalWallet} = this.state;
     return (
       <AuthContext.Consumer>
         {({ currentUser, logout }) => (
@@ -63,18 +64,10 @@ class Dashboard extends React.Component {
 
                 <WalletItems cb={this.props.cb} path={this.props.path} />
 
-                <SubMenu key="sub2" icon={<DollarOutlined />} title="Category">
-                  <Menu.Item
-                    key="subCat1"
-                    onClick={() => this.props.cb(`${this.props.path}/chart`)}
-                  >
-                    Team 1
-                  </Menu.Item>
-                  <Menu.Item key="subCat2">Team 2</Menu.Item>
-                </SubMenu>
-                <Menu.Item key="2" icon={<FileOutlined />}>
-                  Files
+                <Menu.Item key="2" icon={<DollarOutlined />} onClick={() =>{this.setState({ showModalWallet:true })}}>
+                  Add new Wallet
                 </Menu.Item>
+                <ModalAddWallet visible={showModalWallet} onCancel={()=>{this.setState({showModalWallet:false}); console.log(this.state)}}/>
               </Menu>
             </Sider>
             <Layout className="site-layout">
