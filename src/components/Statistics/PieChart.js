@@ -14,6 +14,30 @@ const DemoPie = (props) => {
     data,
     angleField: "saldo",
     colorField: "descripcion",
+    label: {
+      type: 'inner',
+      offset: '-30%',
+      content: function content(_ref) {
+        var percent = _ref.percent;
+        return ''.concat((percent * 100).toFixed(0), '%');
+      },
+      style: {
+        fontSize: 14,
+        textAlign: 'center',
+      },
+    },
+    meta:{
+      descripcion:{
+        alias:"WALLET"
+      },
+      saldo:{
+        alias:"SALDO DISPONIBLE",
+        formatter: (value)=>{
+          return `$${value} USD`
+        }
+      }
+    },
+    interactions: [{ type: 'element-active' }],
   };
   return <Pie {...config} />;
 };
