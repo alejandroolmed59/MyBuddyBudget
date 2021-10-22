@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Modal, Select, InputNumber, Input, Space, message } from "antd";
 import { BookOutlined, WalletFilled , CalculatorOutlined} from "@ant-design/icons";
 import axios from "axios";
 import {updateActions} from '../../redux/slice/updateSlice'
 import { useDispatch } from "react-redux";
+import AuthContext from "../../context/auth-context";
 
 const { Option } = Select;
 
 const ModalBorrow = (props) => {
   const dispatch = useDispatch();
+  const { currentUser } = useContext(AuthContext);
   const [selectedExpenseType, setSelectedExpenseType] = useState("");
   const [selectedWallet, setSelectedWallet] = useState("");
   const [descripcion, setDescripcion] = useState("");
@@ -37,7 +39,7 @@ const ModalBorrow = (props) => {
 
       if(selectedExpenseType!=="" && descripcion!=="" && precio!==0 && selectedWallet!==""){
           await axios.post('http://localhost:3800/expense/pay', {
-            descripcion, precio, usuario:'olme59', expense_categoria:selectedExpenseType, walletid:selectedWallet
+            descripcion, precio, usuario:currentUser.displayName, expense_categoria:selectedExpenseType, walletid:selectedWallet
           })
           message.success("New expense added succesfully!")
           dispatch(updateActions.toggle())

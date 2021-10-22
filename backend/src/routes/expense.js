@@ -6,6 +6,8 @@ router.get('/expense/', ExpenseController.getAllExpenses);
 
 router.post('/expense/', ExpenseController.createExpense)
 
+router.get('/expense/:userName', ExpenseController.getExpensesByUser);
+
 router.post('/expense/pay', ExpenseController.createExpenseAndDeduceFromWallet)
 
 router.get('/expense/:id', ExpenseController.getOneExpense);

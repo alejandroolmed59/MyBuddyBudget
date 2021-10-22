@@ -16,7 +16,6 @@ module.exports.createExpense =  async(req, res, next) => {
 }
 
 module.exports.createExpenseAndDeduceFromWallet =  async(req, res, next) => {
-  console.log(req.body);
   const {descripcion, precio, usuario, expense_categoria, walletid} = req.body;
   try{
     const created = await Expense.create(descripcion, precio, usuario, expense_categoria);
@@ -25,6 +24,16 @@ module.exports.createExpenseAndDeduceFromWallet =  async(req, res, next) => {
     res.status(200).json({message:"Tipo de cuenta creado!"})
   }catch(e){
     console.log(e)
+    res.status(400).json({message: e });
+  }
+}
+
+module.exports.getExpensesByUser = async(req, res, next) => {
+  const userName = req.params.userName;
+  try{
+    const result = await Expense.findExpensesByUser(userName)
+    res.status(200).json(result)
+  }catch(e){
     res.status(400).json({message: e });
   }
 }

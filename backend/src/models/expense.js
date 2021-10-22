@@ -47,6 +47,16 @@ Expense.findById = (data) => {
   return ExpenseModel.findByPk(data);
 }
 
+Expense.findExpensesByUser = (userName) => {
+  return ExpenseModel.findAll({
+    attributes: {exclude:"expense_categoria", include:"expense"},
+    include:"CategoriaExpenseObj",
+    where:{
+      usuario:userName
+    }
+  })
+};
+
 Expense.fetchAll = () => {
   return ExpenseModel.findAll({
     attributes: {exclude:"expense_categoria", include:"expense"},

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Formik } from "formik";
 import AuthContext from "../../context/auth-context";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, message } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router";
 
@@ -25,6 +25,7 @@ const RegisterForm = () => {
           history.push("/");
           funciones.resetForm({ nombre: "", correo: "", password: "" });
         } catch (e) {
+          message.error("error al crear usuario")
           console.log(e);
         }
       }}

@@ -7,12 +7,17 @@ import {
   signOut,
   signInWithEmailAndPassword
 } from "firebase/auth";
+import axios from 'axios'
 import { auth } from "../firebase/fire";
 
 const AuthProvider = (props) => {
   const [currentUser, setCurrentUser] = useState({});
 
   const register = async(username, email, password) => {
+    await axios.post('http://localhost:3800/user/',{
+      usuario:username,
+      correo:email
+    })
     await createUserWithEmailAndPassword(auth, email, password);
     return updateProfile(auth.currentUser, {
       displayName: username
