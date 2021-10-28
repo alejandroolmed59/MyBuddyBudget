@@ -22,10 +22,11 @@ const LoginForm = () => {
             valores.password
           );
           console.log(autenticacion)
-          history.push("/");
+          console.log('authenticado')
+          history.push("/home");
          // funciones.resetForm({correo: "", password: "" });
         } catch (e) {
-          console.log(e);
+          console.log('error no puede ser');
         }
       }}
     >

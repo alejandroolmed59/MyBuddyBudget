@@ -24,7 +24,7 @@ const LayoutDashboard = ({exact, path, ...props}) => {
             exact={exact}
             path={path}
             render={(routeProps)=>{
-                if(!AuthCTX.currentUser) return <Redirect exact to="/login"/>
+                if(!AuthCTX.currentUser) return <Redirect exact to="/"/>
                 const cp =
                 (
                 <DashboardProvider >

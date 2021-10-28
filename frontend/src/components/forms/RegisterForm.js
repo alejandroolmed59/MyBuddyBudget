@@ -22,8 +22,8 @@ const RegisterForm = () => {
             valores.correo,
             valores.password
           );
-          history.push("/");
-          funciones.resetForm({ nombre: "", correo: "", password: "" });
+          history.push("/home");
+         // funciones.resetForm({ nombre: "", correo: "", password: "" });
         } catch (e) {
           message.error("error al crear usuario")
           console.log(e);
