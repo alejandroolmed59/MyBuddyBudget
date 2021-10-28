@@ -1,8 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Menu } from "antd";
 import {MinusOutlined, PlusOutlined, BankOutlined} from "@ant-design/icons";
 import ModalAddExpense from '../Modals/ModalAddExpense'
-import { useState } from 'react/cjs/react.development';
 
 const ManageExpensesAndIncome = () => {
     const [showModalExpense, setModalExpense] = useState(false)
