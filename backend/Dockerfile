@@ -8,7 +8,7 @@ WORKDIR /opt/app
 
 ENV POSTGRE_USER=postgres \
     POSTGRE_PASS=postgres \
-    POSTGRE_HOST=172.19.32.1 \
+    POSTGRE_HOST=postgres \
     POSTGRE_DATABASE=baseSql \
     POSTGRE_PORT=5432
 
