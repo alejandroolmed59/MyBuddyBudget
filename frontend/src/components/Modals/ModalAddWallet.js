@@ -20,8 +20,8 @@ const ModalAddWallet = (props) => {
 
     useEffect(() => {
         async function fetchMyAPI() {
-          let responseCurrencies = await axios.get("http://localhost:3800/currency/");
-          let responseAccountType = await axios.get("http://localhost:3800/account-type/");
+          let responseCurrencies = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/currency/`);
+          let responseAccountType = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/account-type/`);
           responseCurrencies = await responseCurrencies.data;
           responseAccountType = await responseAccountType.data;
           setCurrencies(responseCurrencies);
@@ -37,7 +37,7 @@ const ModalAddWallet = (props) => {
             cuentaTipo !=="" &&
             moneda !== ""
           ) {
-            await axios.post("http://localhost:3800/account", {
+            await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/account`, {
               descripcion,
               cuenta_tipo:cuentaTipo,
               moneda: moneda,

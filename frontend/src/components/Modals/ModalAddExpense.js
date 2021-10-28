@@ -25,8 +25,8 @@ const ModalBorrow = (props) => {
 
   useEffect(() => {
     async function fetchMyAPI() {
-      let responseExp = await axios.get("http://localhost:3800/expense-type/");
-      let responseWall = await axios.get(`http://localhost:3800/account/${currentUser.displayName}`);
+      let responseExp = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/expense-type/`);
+      let responseWall = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/account/${currentUser.displayName}`);
       responseExp = await responseExp.data;
       responseWall = await responseWall.data;
       setWallets(responseWall);
@@ -48,7 +48,7 @@ const ModalBorrow = (props) => {
           precio !== 0 &&
           selectedWallet !== ""
         ) {
-          await axios.post("http://localhost:3800/expense/pay", {
+          await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/expense/pay`, {
             descripcion,
             precio: -precio,
             usuario: currentUser.displayName,
@@ -71,7 +71,7 @@ const ModalBorrow = (props) => {
           precio !== 0 &&
           selectedWallet !== ""
         ) {
-          await axios.post("http://localhost:3800/expense/pay", {
+          await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/expense/pay`, {
             descripcion,
             precio: precio,
             usuario: currentUser.displayName,

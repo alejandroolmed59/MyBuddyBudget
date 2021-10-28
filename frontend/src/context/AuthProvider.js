@@ -14,7 +14,7 @@ const AuthProvider = (props) => {
   const [currentUser, setCurrentUser] = useState({});
 
   const register = async(username, email, password) => {
-    await axios.post('http://localhost:3800/user/',{
+    await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/user/`,{
       usuario:username,
       correo:email
     })

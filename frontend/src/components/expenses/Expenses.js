@@ -11,7 +11,7 @@ export default function Expenses() {
   const [expenses, setExpenses] = useState([]);
   useEffect(() => {
     const fetch = async () => {
-      let response = await axios.get(`http://localhost:3800/expense/${currentUser.displayName}`);
+      let response = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/expense/${currentUser.displayName}`);
       response = await response.data;
       setExpenses(response);
     };

@@ -12,7 +12,7 @@ const Profile = () => {
   useEffect(() => {
     const fetch = async () => {
       let response = await axios.get(
-        `http://localhost:3800/account/${currentUser.displayName}`
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/account/${currentUser.displayName}`
       );
       response = await response.data;
       setWallets(response);
