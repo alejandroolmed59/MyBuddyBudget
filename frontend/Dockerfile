@@ -1,15 +1,20 @@
 # BUILD
-# docker build -t frontend:0.1.0 -f Front.dockerfile .
+# docker build -t alejandroolmed59/frontend:1.0 .
+# BUILD K8S
+# docker build -t alejandroolmed59/frontendbuddy:customdomain -f Dockerfile .
 # RUN
-# docker run -p 80:80 -d frontend:0.1.0
+# docker run -p 80:80 -d alejandroolmed59/frontend:1.0
 
 FROM node:14.18.1 as compilacion
+
 
 COPY . /opt/app
 
 WORKDIR /opt/app
 
 RUN npm install
+
+ENV REACT_APP_BACKEND_BASE_URL=http://api.med-aid.software:3800
 
 RUN npm run build
 
