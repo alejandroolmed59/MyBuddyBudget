@@ -48,6 +48,8 @@ spec:
               value: postgres
             - name: POSTGRES_DB
               value: baseSql
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
           resources:
             limits:
               memory: "256Mi"
@@ -56,7 +58,7 @@ spec:
             - containerPort: 5432
           volumeMounts:
             - name: mysql-persistent-storage
-              mountPath: /var/lib/postgresql/data/data2
+              mountPath: /var/lib/postgresql/data
       volumes:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
