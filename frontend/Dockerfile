@@ -19,5 +19,5 @@ ENV REACT_APP_BACKEND_BASE_URL=http://api.med-aid.software:3800
 RUN npm run build
 
 FROM nginx:1.21.3
-#TODO: CONFIGURAR ERROR DE 404 CUANDO REFRESCO
+#TODO: CONFIGURAR ERROR DE 404 CUANDO REFRESCO ruta que no es /
 COPY --from=compilacion /opt/app/build /usr/share/nginx/html
