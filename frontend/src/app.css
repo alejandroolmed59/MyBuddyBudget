@@ -22,14 +22,33 @@
   align-items: center;
 }
 
-.redNumbers{
-  color:red
+.redNumbers {
+  color: red;
 }
 
-.greenNumbers{
-  color:#00a000
+.greenNumbers {
+  color: #00a000;
+}
+.whiteText{
+  color:#fff
 }
 
-.marginh1weird{
+.marginh1weird {
   margin: 10px 0px 0px 50px;
+}
+.background {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("./assets/background.png");
+  background-color: #244bc5;
+  background-size: cover;
+}
+
+.transparentInput{
+  border-color: #6796af !important;
+  outline: none;
+  background: transparent !important;
+  text-align: center;
+  background-color: transparent !important;
+  color: #F1F2EF !important;
 }

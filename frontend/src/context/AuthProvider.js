@@ -32,7 +32,7 @@ const AuthProvider = (props) => {
 
   useEffect(() => {
     const observer = onAuthStateChanged(auth, (user) => {
-      console.log("Iniciando sesion con "+JSON.stringify(user))
+      //console.log("Iniciando sesion con "+JSON.stringify(user))
       setCurrentUser(user);
     });
 
