@@ -1,0 +1,8 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: certificate-med-aid
+spec:
+  domains:
+    - med-aid.software
+    - api.med-aid.software

@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: alejandroolmed59/frontendbuddy:customdomain
+        image: alejandroolmed59/frontendbuddy:customdomain2
         resources:
           limits:
             memory: "128Mi"
