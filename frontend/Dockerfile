@@ -1,5 +1,5 @@
 # BUILD
-# docker build -t alejandroolmed59/frontend:1.0 .
+# docker build -t alejandroolmed59/frontendbuddy:1.0 .
 # BUILD K8S
 # docker build -t alejandroolmed59/frontendbuddy:customdomain -f Dockerfile .
 # RUN
