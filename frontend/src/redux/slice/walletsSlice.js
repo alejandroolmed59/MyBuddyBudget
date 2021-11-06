@@ -9,8 +9,11 @@ export const walletSlice = createApi({
       query: (displayName) => `/account/${displayName}`,
     }),
   }),
+  refetchOnFocus:true,
+  refetchOnMountOrArgChange:true,
+  refetchOnReconnect:true
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetWalletsByName } = walletSlice
+export const { useGetWalletsByNameQuery } = walletSlice

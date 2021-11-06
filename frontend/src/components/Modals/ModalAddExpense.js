@@ -9,7 +9,7 @@ import axios from "axios";
 import { updateActions } from "../../redux/slice/updateSlice";
 import { useDispatch, useSelector } from "react-redux";
 import AuthContext from "../../context/auth-context";
-import {walletSlice} from '../../redux/slice/walletsSlice'
+import {useGetWalletsByNameQuery} from '../../redux/slice/walletsSlice'
 
 const { Option } = Select;
 
@@ -23,25 +23,21 @@ const ModalBorrow = (props) => {
 
   const [expensesTypeArr, setExpensesArr] = useState([]);
   const [wallets, setWallets] = useState([]);
-  const useGetWalletsByName = walletSlice.endpoints.getWalletsByName.useQuery;
-  const {data, isLoading} = useGetWalletsByName(currentUser.displayName);
+
+  const {data, isSuccess} = useGetWalletsByNameQuery(currentUser.displayName);
   const shouldUpdate = useSelector(store=>store.update.update)
 
   useEffect(() => {
     
     async function fetchMyAPI() {
       let responseExp = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/expense-type/`);
-    //  let responseWall = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/account/${currentUser.displayName}`);
       responseExp = await responseExp.data;
-     // responseWall = await responseWall.data;
-      //setWallets(responseWall);
       setExpensesArr(responseExp);
     }
     fetchMyAPI();
-    if(!isLoading) setWallets(data)
-    console.log("REDUX: ",data);
+    if(isSuccess&&data) setWallets(data)
     //eslint-disable-next-line
-  }, [data,shouldUpdate ]);
+  }, [isSuccess,data,shouldUpdate]);
 
   const addExpensePost = async () => {
     if (props.isExpense) {

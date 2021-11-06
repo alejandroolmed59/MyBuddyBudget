@@ -2,28 +2,29 @@ import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/auth-context";
 import { Image, Row, Col, Card } from "antd";
 import PieChart from "../Statistics/PieChart";
-import axios from "axios";
+//import axios from "axios";
+import {useGetWalletsByNameQuery} from '../../redux/slice/walletsSlice'
 import "../../app.css";
 
 const Profile = () => {
   const [assets, setAssets] = useState(0);
   const [wallets, setWallets] = useState([{descripcion:"dolar",saldo:4}]);
   const { currentUser } = useContext(AuthContext);
+
+  const {data, isSuccess} = useGetWalletsByNameQuery(currentUser.displayName);
   useEffect(() => {
     const fetch = async () => {
-      let response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_BASE_URL}/account/${currentUser.displayName}`
-      );
-      response = await response.data;
-      setWallets(response);
-      let total = response.reduce((acum, wallet) => {
-        return Number(acum) + Number(wallet.saldo);
-      }, 0);
-      setAssets(total);
+      if(isSuccess&&data){
+        setWallets(data);
+        let total = data.reduce((acum, wallet) => {
+          return Number(acum) + Number(wallet.saldo);
+        }, 0);
+        setAssets(total);
+      }
     };
     fetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isSuccess, data]);
   return (
     <div className="flex-profile ">
       <Image.PreviewGroup>

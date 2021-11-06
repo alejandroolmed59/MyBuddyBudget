@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Row, Col, Statistic, Card, Button, InputNumber, Select, message } from "antd";
+import { Row, Col, Statistic, Card, Button, InputNumber, Select, message, Space } from "antd";
 import { ArrowUpOutlined, MoneyCollectOutlined, WalletFilled } from "@ant-design/icons";
-import { walletSlice } from "../../redux/slice/walletsSlice";
+import { useGetWalletsByNameQuery } from "../../redux/slice/walletsSlice";
 import AuthContext from "../../context/auth-context";
 import axios from 'axios';
 
@@ -13,12 +13,12 @@ const WalletDetail = ({ wallet }) => {
   const [selectedWallet, setSelectedWallet] = useState("");
   
   const { currentUser } = useContext(AuthContext);
-  const useGetWalletsByName = walletSlice.endpoints.getWalletsByName.useQuery;
-  const { data, isLoading } = useGetWalletsByName(currentUser.displayName);
+
+  const { data, isSuccess } = useGetWalletsByNameQuery(currentUser.displayName);
   //wallet.cuenta, wallet.descripcion, wallet.saldo
   useEffect(() => {
-    if (!isLoading) setWallets(data);
-  }, [data, isLoading]);
+    if (isSuccess&&data) setWallets(data);
+  }, [data, isSuccess]);
 
   const transferir=async()=>{
     //console.log(selectedWallet)
@@ -37,7 +37,7 @@ const WalletDetail = ({ wallet }) => {
   };
 
   return (
-    <Row gutter={[16, 16]} style={{ margin: "3rem" }}>
+    <Row gutter={[16, 16]} style={{ margin: "3rem" }} className="vertical-center">
       <Col span={12}>
         <Card>
           <Statistic title="Account Name" value={wallet.descripcion} />
@@ -73,31 +73,35 @@ const WalletDetail = ({ wallet }) => {
         </Card>
       </Col>
       <Col span={24}>
-        <InputNumber
-          onChange={(value) => {
-            setAmount(value);
-          }}
-        ></InputNumber>
-        <Select
-          showSearch
-          style={{ width: 200 }}
-          placeholder={
-            <>
-              <WalletFilled className="site-form-item-icon" /> Select a wallet
-            </>
-          }
-          optionFilterProp="children"
-          onChange={(value) => setSelectedWallet(value)}
-        >
-          {wallets.map((wallet) => {
-            return (
-              <Option value={wallet.cuenta}>
-                {wallet.descripcion} - ${wallet.saldo}
-              </Option>
-            );
-          })}
-        </Select>
-        <Button onClick={()=>transferir()}>Transferir</Button>
+        <Space size={10}>
+          <InputNumber
+            min={0}
+            formatter={(value) => `$ ${value}`}
+            onChange={(value) => {
+              setAmount(value);
+            }}
+          ></InputNumber>
+          <Select
+            showSearch
+            style={{ width: 200 }}
+            placeholder={
+              <>
+                <WalletFilled className="site-form-item-icon" /> Select a wallet
+              </>
+            }
+            optionFilterProp="children"
+            onChange={(value) => setSelectedWallet(value)}
+          >
+            {wallets.map((wallet) => {
+              return (
+                <Option value={wallet.cuenta}>
+                  {wallet.descripcion} - ${wallet.saldo}
+                </Option>
+              );
+            })}
+          </Select>
+          <Button onClick={()=>transferir()}>Transferir</Button>
+        </Space>
       </Col>
     </Row>
   );
