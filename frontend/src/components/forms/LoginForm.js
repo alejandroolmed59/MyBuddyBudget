@@ -37,7 +37,7 @@ const LoginForm = () => {
         handleBlur,
         touched,
       }) => (
-        <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginTop:'15em'}}>
+        <div className="background" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
           <Form
             name="normal_login"
             className="login-form"
@@ -86,7 +86,7 @@ const LoginForm = () => {
             </Form.Item>
             <Form.Item>
               <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
+                <Checkbox className="whiteText" >Remember me</Checkbox>
               </Form.Item>
             </Form.Item>
 
@@ -98,7 +98,7 @@ const LoginForm = () => {
               >
                 Log in
               </Button>
-              <div>
+              <div className="whiteText" >
                 New User? 
                 <Button type="dashed" onClick={()=>history.push("/register")}>
                   Register now!

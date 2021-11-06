@@ -10,6 +10,16 @@ module.exports.createAccount =  async(req, res, next) => {
     res.status(400).json({message: e });
   }
 }
+module.exports.transferWallet =  async(req, res, next) => {
+  const {walletIdOrigen, walletIdDestino, amount} = req.body;
+  try{
+    const deduced = await Account.transferWallet(walletIdOrigen, walletIdDestino, amount);
+    console.log(deduced);
+    res.status(200).json({message:"Transferencia exitosa!"})
+  }catch(e){
+    res.status(400).json({message: e });
+  }
+}
 
 module.exports.getAccountsByUser = async(req, res, next) => {
   const userName = req.params.userName;

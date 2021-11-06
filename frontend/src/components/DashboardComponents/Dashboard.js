@@ -59,10 +59,10 @@ class Dashboard extends React.Component {
                 >
                   Bienvenido {currentUser.displayName}
                 </Menu.Item>
+                
+                <ManageExpensesAndIncome key="osiosi42" />
 
-                <ManageExpensesAndIncome />
-
-                <WalletItems cb={this.props.cb} path={this.props.path} />
+                <WalletItems key="osiono23" cb={this.props.cb} path={this.props.path} />
 
                 <Menu.Item key="2" icon={<DollarOutlined />} onClick={() =>{this.setState({ showModalWallet:true })}}>
                   Add new Wallet

@@ -38,7 +38,7 @@ const RegisterForm = () => {
         handleBlur,
         touched,
       }) => (
-        <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginTop:'15em'}}>
+        <div className="background" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
           <Form
             name="normal_login"
             className="login-form"
@@ -117,7 +117,7 @@ const RegisterForm = () => {
               >
                 Register
               </Button>
-              <div>
+              <div className="whiteText" >
                 Already registered?   
                 <Button type="dashed" onClick={()=>history.push("/login")}>
                   Log in now!

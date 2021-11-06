@@ -57,6 +57,20 @@ Account.modifyWalletBalance = (walletId, amount) =>{
     }
   });
 }
+Account.transferWallet = (walletIdOrigen, walletIdDestino, amount)=>{
+  AccountModel.increment('saldo', { 
+    by: -amount, 
+    where: {
+      cuenta:walletIdOrigen
+    }
+  });
+  return AccountModel.increment('saldo', { 
+    by: amount, 
+    where: {
+      cuenta:walletIdDestino
+    }
+  });
+}
 
 Account.findAccountsByUser = (userName) => {
   return AccountModel.findAll({
